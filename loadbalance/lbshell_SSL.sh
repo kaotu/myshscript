@@ -33,11 +33,7 @@
         read server1
         echo  -n "Enter IP server2: "
         read server2
-<<<<<<< HEAD
 	echo -n "Enter your Site: "
-=======
-	echo -n "Enter your $Site: "
->>>>>>> 9d1c8267ec35f71a7d7029d79f9a59af4a93ef9e
 	read Site
         sudo cat >> /etc/haproxy/haproxy_SSL.cfg <<-EOF
 	frontend www-https
