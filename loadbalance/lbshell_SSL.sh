@@ -6,7 +6,6 @@
         	        #    loadBalance   #
                 	####################
 "                  
-#	<<COMMENT
 	echo -n "Enter IP DNS Name1: "
 	read Name1
 	cat >> /etc/hosts <<-EOF
@@ -27,17 +26,16 @@
 
 	sudo yum -y install haproxy
 	sudo mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
-	sudo cp haproxy.cfg /etc/haproxy/
+	sudo cp haproxy_SSL.cfg /etc/haproxy/
 
 	sleep 5
-#	COMMENT
 	echo -n "Enter IP server1: "
         read server1
         echo  -n "Enter IP server2: "
         read server2
 	echo -n "Enter your $Site: "
 	read Site
-        sudo cat >> /etc/haproxy/haproxy.cfg <<-EOF
+        sudo cat >> /etc/haproxy/haproxy_SSL.cfg <<-EOF
 	frontend www-https
    	    bind *:443 ssl crt /etc/haproxy/certs/$Site.pem
    	    reqadd X-Forwarded-Proto:\ https
@@ -65,15 +63,6 @@
 	
 	echo "server1 is: $server1"
         echo "server2 is: $server2"
-	
-
-
-
-
-
-
-
-
 
 	sleep 5
 	
