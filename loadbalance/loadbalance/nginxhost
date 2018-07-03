@@ -1,0 +1,13 @@
+#!/bin/bash
+	sudo clear
+	printf "	###################
+			# Edit host file  #
+			#    on nginx     #
+			###################
+	"
+	echo  -n "Enter IP Name : "
+	read Name
+	sudo cat >> /etc/hosts <<EOF
+	$Name
+	EOF
+	echo "Host IP Name: $Name"
