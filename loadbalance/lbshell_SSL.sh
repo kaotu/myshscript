@@ -26,11 +26,7 @@
 
 	sudo yum -y install haproxy
 	sudo mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.orig
-<<<<<<< HEAD
 	sudo cp haproxy.cfg /etc/haproxy/
-=======
-	sudo cp haproxy_SSL.cfg /etc/haproxy/
->>>>>>> 6212758e1531df99e169e5d952abd20b2d171c01
 
 	sleep 5
 	echo -n "Enter IP server1: "
@@ -39,11 +35,7 @@
         read server2
 	echo -n "Enter your Site: "
 	read Site
-<<<<<<< HEAD
         sudo cat >> /etc/haproxy/haproxy.cfg <<-EOF
-=======
-        sudo cat >> /etc/haproxy/haproxy_SSL.cfg <<-EOF
->>>>>>> 6212758e1531df99e169e5d952abd20b2d171c01
 	frontend www-https
    	    bind *:443 ssl crt /etc/haproxy/certs/$Site.pem
    	    reqadd X-Forwarded-Proto:\ https
@@ -54,7 +46,6 @@
 	#---------------------------------------------------------------------
 	# BackEnd roundrobin as balance algorithm
 	#---------------------------------------------------------------------
-<<<<<<< HEAD
         backend app-main
           balance roundrobin                                     #Balance algorithm
           option httpchk HEAD / HTTP/1.1\r\nHost:\ localhost    #Check the server app
@@ -68,21 +59,6 @@
 
 	backend letsencrypt-backend
    	  server letsencrypt 127.0.0.1:54321
-=======
-        	backend app-main
-             	balance roundrobin                                     #Balance algorithm
-             	option httpchk HEAD / HTTP/1.1\r\nHost:\ localhost    #Check the server app
-             	server nginx1 $server1:80 check                         #Nginx1
-             	server nginx2 $server2:80 check                         #Nginx2
-	#SSL
-	backend www-backend
-		redirect scheme https if !{ ssl_fc }
-   		server nginx1 $server1:80 check
-   		server nginx2 $server2:80 check
-
-	backend letsencrypt-backend
-   		server letsencrypt 127.0.0.1:54321
->>>>>>> 6212758e1531df99e169e5d952abd20b2d171c01
 	EOF
 	
 	echo "server1 is: $server1"
@@ -112,8 +88,4 @@
 	sudo systemctl restart rsyslog
 	sudo systemctl start haproxy
 	sudo systemctl enable haproxy
-<<<<<<< HEAD
 	echo "Complete!"
-=======
-	echo "Finish"
->>>>>>> 6212758e1531df99e169e5d952abd20b2d171c01
